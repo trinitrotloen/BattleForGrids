@@ -16,8 +16,8 @@ public class CameraChanges : MonoBehaviour
     void Start()
     {
         myCam = GetComponent<Camera>();
-        myCam.transform.position = new Vector3(myCam.transform.position.x, myCam.transform.position.y, -GameObject.Find("Map").GetComponent<GridBoardWithQuads>().mapSize.x);
-        myCam.orthographicSize = GameObject.Find("Map").GetComponent<GridBoardWithQuads>().mapSize.x/2;
+        myCam.transform.position = new Vector3(myCam.transform.position.x, myCam.transform.position.y, -(GameObject.Find("Map").GetComponent<GridBoardWithQuads>().mapSize.x * GameObject.Find("Map").GetComponent<GridBoardWithQuads>().tileSize));
+        myCam.orthographicSize = (GameObject.Find("Map").GetComponent<GridBoardWithQuads>().mapSize.x* GameObject.Find("Map").GetComponent<GridBoardWithQuads>().tileSize) /2;
         maxSize = myCam.orthographicSize;
         OrgResolution = Screen.currentResolution;
     }
@@ -42,6 +42,13 @@ public class CameraChanges : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             lastPosition = Input.mousePosition;
+            RaycastHit2D hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            hit = Physics2D.Raycast(ray.origin, ray.direction, 100.0f);
+                if (hit.transform)
+                {
+                    print(hit.transform.gameObject.name);
+                }
         }
 
         if (Input.GetMouseButton(0))

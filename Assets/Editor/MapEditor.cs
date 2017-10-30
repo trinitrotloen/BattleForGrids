@@ -12,6 +12,6 @@ public class MapEditor : Editor {
 
         GridBoardWithQuads battleField = target as GridBoardWithQuads;
 
-       // battleField.GenerateBoard();
+        //battleField.GenerateBoard();
     }
 }
