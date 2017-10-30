@@ -41,14 +41,18 @@ public class CameraChanges : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
+            GameObject gobj;
             lastPosition = Input.mousePosition;
             RaycastHit2D hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             hit = Physics2D.Raycast(ray.origin, ray.direction, 100.0f);
                 if (hit.transform)
                 {
+                gobj = hit.transform.gameObject;
                     print(hit.transform.gameObject.name);
+                Utility.ChangeLandOwner(gobj);
                 }
+
         }
 
         if (Input.GetMouseButton(0))
